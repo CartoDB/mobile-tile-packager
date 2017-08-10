@@ -16,18 +16,25 @@ describe('Named Maps API test...', function() {
     }
   });
   
-  var tileurl = conf.tile_url.replace('{username}', params.options.username).replace('{layergroupid}', params.options.layergroupid);
+  api.inst(params.options.username, params.options.template, function(err, layerId, meta){
+    if (err) cb(err);      
+    else {
+        var tileurl = conf.tile_url.replace('{username}', params.options.username).replace('{layergroupid}', layerId);
   
-  it('should download tiles and create ' + params.options.tilesfileMapsAPI + ' file', function(cb) {      
-    api.getMbtiles(tileurl, params.options.tilesfileMapsAPI, params.options.minzoom, params.options.maxzoom, params.options.bounds, params.options.logOutput, function(err){
-      if (err) cb(err);      
-      else cb();
-    });
-  });
+        it('should download tiles and create ' + params.options.tilesfileMapsAPI + ' file', function(cb) {      
+          api.getMbtiles(tileurl, params.options.tilesfileMapsAPI, params.options.minzoom, params.options.maxzoom, params.options.bounds, params.options.logOutput, function(err){
+            if (err) cb(err);      
+            else cb();
+          });
+        });
     
-  it('file ' + params.options.tilesfileMapsAPI + ' should exsits and greater than 0 bytes', function() {      
-    assert.notEqual(hlprs.fileExists(params.options.tilesfileMapsAPI), 0);
+        it('file ' + params.options.tilesfileMapsAPI + ' should exsits and greater than 0 bytes', function() {      
+          assert.notEqual(hlprs.fileExists(params.options.tilesfileMapsAPI), 0);
+        });
+      cb();  
+    }
   });
+  
   
   after(function() {
     if (hlprs.fileExists(params.options.tilesfileMapsAPI)) {
