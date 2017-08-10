@@ -2,9 +2,9 @@
  
 var conf = require('../config.js');
 var options = {
-  minzoom: '0',
-  maxzoom: '18',
-  bounds: '-121.951997,37.322666,-121.937599,37.328007', 
+  minzoom: '10',
+  maxzoom: '10',
+  bounds: '-3.792343,40.344451,-3.576736,40.487693', 
   username: 'nutiteq',
   template: 'tpl_f1407ed4_84b8_11e6_96bc_0ee66e2c9693',
   layergroupid: 'nutiteq@3c17b329@bf4de1084168928e783054d2645f0176:1471255087943',
