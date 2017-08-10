@@ -5,13 +5,13 @@ var options = {
   minzoom: '0',
   maxzoom: '18',
   bounds: '-121.951997,37.322666,-121.937599,37.328007', 
-  username: 'carto_username',
-  template: 'tpl_9bfaa116_...',
-  layergroupid: 'carto_username@3a6...',
+  username: 'nutiteq',
+  template: 'tpl_f1407ed4_84b8_11e6_96bc_0ee66e2c9693',
+  layergroupid: 'nutiteq@f1407ed4_84b8_11e6_96bc_0ee66e2c9693',
   tilesfileMapsAPI: conf.output + '/test_maps_api.mbtiles',
   tilesfileSQLAPI: conf.output + '/test_sql_api.mbtiles',
   geoJsonFile: conf.output + '/test.geojson',
-  sql: 'your-select-query',
+  sql: 'select * from cities15000',
   logOutput: false
 };
 
