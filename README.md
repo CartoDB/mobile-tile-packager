@@ -3,11 +3,10 @@
 # vector-tile-packager
 Creates mbtiles from Named Maps API of SQL API
 
-packager is tested with node.js versions: 0.10.4x and v4.5.x.
-
 Requirements:
 - Mapbox tippecanoe installed on machine. (https://github.com/mapbox/tippecanoe)
 - Redis service running in localhost
+- node.js
 
 install:
 ```sh
@@ -71,6 +70,7 @@ Request will return job info with package download url:
 Run only kue/redis related tests
 ```sh
   $ npm run test-kue
+```
 
 Run all tests
 ```sh
