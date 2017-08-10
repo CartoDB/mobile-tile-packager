@@ -1,0 +1,96 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"title": "CARTO to Vector MBTiles",
+		"description": "Creates Vector MBTiles map package from CARTO Named Maps API",
+		"termsOfService": "http://carto.com/terms/",
+		"contact": {
+			"name": "CARTO support",
+			"url": "http://www.carto.com",
+			"email": "mobile-support@carto.com"
+		},
+		"version": "0.0.1"
+	},
+	"consumes": [
+		"application/json"
+	],
+	"produces": [
+		"application/json"
+	],
+	"host": "he1.nutiteq.com:8787",
+	"paths": {
+		"/api/v1/package_exports_by_sql": {
+			"post": {
+				"description": "Export CARTO map as MBTiles",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "post_body",
+						"in": "body",
+						"description": "Query data",
+						"required": true,
+						"schema": {
+							"type": "object",
+							"properties": {
+								"type": {
+									"type": "string",
+									"default": "geojson"
+								},
+								"data": {
+									"type": "object",
+									"properties": {
+										"username": {
+											"type": "string"
+										},
+										"template": {
+											"type": "string"
+										},
+										"sql": {
+											"type": "string",
+											"default": "select * from YOUR_TABLE"
+										},
+										"minzoom": {
+											"type": "integer",
+											"default": 1
+										},
+										"maxzoom": {
+											"type": "integer",
+											"default": 14
+										}
+									}
+								}
+							}
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Status or download for MBTiles.",
+						"schema": {
+							"type": "object",
+							"properties": {
+								"username": {
+									"type": "string"
+								},
+								"template": {
+									"type": "string"
+								},
+								"started_at": {
+									"type": "string"
+								},
+								"duration": {
+									"type": "string"
+								},
+								"download_url": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
