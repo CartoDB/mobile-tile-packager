@@ -1,7 +1,14 @@
 [![Build Status](https://travis-ci.org/CartoDB/mobile-tile-packager.svg?branch=master)](https://travis-ci.org/CartoDB/mobile-tile-packager)
 
 # vector-tile-packager
-Creates mbtiles from Named Maps API of SQL API
+
+Creates vector tile mbtiles from CARTO Named Maps API of SQL API. The script is meant for your on-premises usage, even if it has http API. Result mbtiles can be used in CARTO Mobile SDK as offline vector tile data source. For this you need also styling, what you can take as CartoCSS directly from CARTO Builder (web interface).
+
+It has two usage modes:
+
+* do SQL query to the dataset, convert result to mbtiles for given zoom range. Suitable for big datasets, for big areas, where number of tiles would be huge.
+* scrape tiles of given map from CARTO Maps API. Suitable for smaller regions.
+
 
 Requirements:
 - Mapbox tippecanoe installed on machine. (https://github.com/mapbox/tippecanoe)
