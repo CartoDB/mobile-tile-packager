@@ -3,4 +3,4 @@ language: node_js
 node_js:
   - "0.10"
   - "4.5"
-script: npm install && npm test
+script: apt-get install -y libprotobuf-dev protobuf-compiler libsqlite3-dev;git clone https://github.com/mapbox/tippecanoe.git;cd tippecanoe;make;make install;cd ..;npm install && npm test
