@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/CartoDB/mobile-tile-packager.svg?token=PtvMeyvagkwm2BbzYFSe&branch=master)](https://travis-ci.com/CartoDB/mobile-tile-packager)
+[![Build Status](https://travis-ci.org/CartoDB/mobile-tile-packager.svg?branch=master)](https://travis-ci.org/CartoDB/mobile-tile-packager)
 
 # vector-tile-packager
 Creates mbtiles from Named Maps API of SQL API
