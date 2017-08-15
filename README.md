@@ -7,7 +7,8 @@ Creates vector tile mbtiles from CARTO Named Maps API of SQL API. The script is 
 It has two usage modes:
 
 a) do SQL query to the dataset, convert result to mbtiles for given zoom range. Suitable for big datasets, for big areas, where number of tiles would be huge.
-b) scrape tiles of given map from CARTO Maps API. Suitable for smaller regions.
+
+b) download all tiles of given map from CARTO Maps API, scraping for given area and zoom range. Suitable for limited regions.
 
 
 Requirements:
