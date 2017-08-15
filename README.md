@@ -6,17 +6,17 @@ Creates vector tile mbtiles from CARTO Named Maps API of SQL API. The script is 
 
 It has two usage modes:
 
-a) do SQL query to the dataset, convert result to mbtiles for given zoom range. Suitable for big datasets, for big areas, where number of tiles would be huge.
+a) do **SQL query** to the dataset, convert result to mbtiles for given zoom range. Suitable for big datasets, for big areas, where number of tiles would be huge. Works for single layer map only.
 
-b) download all tiles of given map from CARTO Maps API, scraping for given area and zoom range. Suitable for limited regions.
+b) **download all tiles** of given map from CARTO Maps API, scraping for given area and zoom range. Suitable for limited regions. Works for multi-layer maps.
 
 
-Requirements:
+### Requirements:
 - Mapbox tippecanoe installed on machine. (https://github.com/mapbox/tippecanoe)
 - Redis service running in localhost
 - node.js
 
-install:
+### Install:
 ```sh
   $ npm install
 ```
@@ -31,7 +31,7 @@ install:
 ### 1. Prepare data in CARTO
 1. Upload map data table, set privacy to public or shared by link
 2. Create map, define simple styling - colors etc. Complex styling (heatmaps, torque etc) probably does not work
-3. Note map ID from URL, convert it to template ID, so e.g. https://cartomobile-team.carto.com/u/nutiteq/builder/846ab11c-f385-11e6-9314-0ee66e2c9693 becomes tpl_846ab11c_f385_11e6_9314_0ee66e2c9693
+3. Note map ID from URL, convert it to template ID, so e.g. `https://cartomobile-team.carto.com/u/nutiteq/builder/846ab11c-f385-11e6-9314-0ee66e2c9693` becomes *tpl_846ab11c_f385_11e6_9314_0ee66e2c9693*
 3. Make map privacy to "shared by link" or "public"
 
 **NB! Does NOT work with private map or dataset**
