@@ -1,13 +1,13 @@
 [![Build Status](https://travis-ci.org/CartoDB/mobile-tile-packager.svg?branch=master)](https://travis-ci.org/CartoDB/mobile-tile-packager)
 
-# vector-tile-packager
+# CARTO vector-tile-packager
 
 Creates vector tile mbtiles from CARTO Named Maps API of SQL API. The script is meant for your on-premises usage, even if it has http API. Result mbtiles can be used in CARTO Mobile SDK as offline vector tile data source. For this you need also styling, what you can take as CartoCSS directly from CARTO Builder (web interface).
 
 It has two usage modes:
 
-* do SQL query to the dataset, convert result to mbtiles for given zoom range. Suitable for big datasets, for big areas, where number of tiles would be huge.
-* scrape tiles of given map from CARTO Maps API. Suitable for smaller regions.
+a) do SQL query to the dataset, convert result to mbtiles for given zoom range. Suitable for big datasets, for big areas, where number of tiles would be huge.
+b) scrape tiles of given map from CARTO Maps API. Suitable for smaller regions.
 
 
 Requirements:
@@ -40,19 +40,19 @@ install:
 A cURL POST request allows you to export the mbtiles, which you will have to poll with a GET command until the state is complete.
 (NB! bounds must be separated by commas, in lon/lat order (e.g. ` "bounds": "-121.951997,37.322666,-121.937599,37.328007"`)
 
-Using Named Maps API, call POST request:
+**Method 1 - Using Named Maps API**, do POST request:
 ```sh
   curl -H "Content-Type: application/json" -X POST -d '{"type": "tiles", "data": {"username": "{username}", "template":"{template}", "minzoom": 10, "maxzoom": 18, "bounds": "{bounds}"}}' 
   http://{server}/api/v1/package_exports
 ```
 
-Using SQL API, call POST request:
+**Method 2 - Using SQL API**, do POST request:
 ```sh
   curl -H "Content-Type: application/json" -X POST -d '{"type": "geojson", "data": {"username": "{username}", "template":"{template}", "sql": "{sql}", "minzoom": 10, "maxzoom": 18}}' 
   http://{server}/api/v1/package_exports_by_sql
 ```
 
-POST Request will return job id:
+POST Request for either method will return job id:
 ```sh
   {"id":301,"created_at":"2016-12-16T10:30:23.076Z"}
 ```
@@ -70,7 +70,7 @@ Request will return job info with package download url:
 ### 3. use file in your app code:
 1. unzip the result, get .mbtiles and .json
 2. put .mbtiles into app code, or make app to download it
-4. add map using MBTilesTileDataSource, use CartoCSSStyleSet as MBVectorTileDecoder
+4. add data to map using MBTilesTileDataSource, use CartoCSSStyleSet as MBVectorTileDecoder. You can use CartoCSS from the map styling, see point 1.2 above.
 
 ## Run test suite:
 
