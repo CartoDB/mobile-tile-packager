@@ -6,7 +6,7 @@ Creates vector tile mbtiles from CARTO Named Maps API of SQL API. The script is 
 
 It has two usage modes:
 
-a) do **SQL query** to the dataset, convert result to mbtiles for given zoom range. Suitable for big datasets, for big areas, where number of tiles would be huge. Works for single layer map only.
+a) do **SQL query** to the dataset, convert result to mbtiles for given zoom range. Suitable for big datasets, for big areas, where number of tiles would be huge. Works for single layer map only. Typical SQL could be here just `SELECT * FROM your-table`, but you can add your custom filters to it.
 
 b) **download all tiles** of given map from CARTO Maps API, scraping for given area and zoom range. Suitable for limited regions. Works for multi-layer maps.
 
