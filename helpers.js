@@ -1,4 +1,5 @@
 var fs = require('fs'); 
+var util = require('util');
 
 function fileExists(filePath){
   try {
