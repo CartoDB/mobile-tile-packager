@@ -1,0 +1,17 @@
+version: '3'
+services:
+  redis:
+    image: redis:latest
+
+  mtp:
+    build:
+      context: .
+    environment:
+      - REDIS_HOST=redis
+    links:
+      - redis
+    ports:
+      - '8787:8787'
+    volumes:
+      - ./:/usr/src/app
+    command: sleep 1d

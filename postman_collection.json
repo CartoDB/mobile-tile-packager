@@ -1,0 +1,99 @@
+{
+	"info": {
+		"_postman_id": "3bd62acf-5220-45d7-b993-5bc1d1e40b78",
+		"name": "Mobile Tile Packager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create maps job",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"type\": \"tiles\",\n\t\"data\": {\n\t\t\"username\": \"USER\",\n\t\t\"template\":\"00000000_0000_0000_0000_000000000000\",\n\t\t\"minzoom\": 0,\n\t\t\"maxzoom\": 20,\n\t\t\"bounds\": \"-180.0,-90.0,180.0,90\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8787/api/v1/package_exports",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8787",
+					"path": [
+						"api",
+						"v1",
+						"package_exports"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create SQL job",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"type\": \"geojson\",\n\t\"data\": {\n\t\t\"username\": \"USER\",\n\t\t\"template\":\"00000000_0000_0000_0000_000000000000\",\n\t\t\"sql\": \"SELECT * FROM USER_TABLE\",\n\t\t\"minzoom\": 0,\n\t\t\"maxzoom\": 20\n\t}\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8787/api/v1/package_exports_by_sql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8787",
+					"path": [
+						"api",
+						"v1",
+						"package_exports_by_sql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Job status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8787/api/v1/package_exports/jcamacho/:job_id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8787",
+					"path": [
+						"api",
+						"v1",
+						"package_exports",
+						"jcamacho",
+						":job_id"
+					],
+					"variable": [
+						{
+							"key": "job_id",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
