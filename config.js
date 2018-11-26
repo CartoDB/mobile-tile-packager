@@ -11,7 +11,7 @@ module.exports = {
   sql_api_url: 'http://{username}.carto.com/api/v2/sql?q={sql}&format=GeoJSON',
   tippe: 'tippecanoe -o {mbtiles_file} --minimum-zoom={minzoom} --maximum-zoom={maxzoom} --layer=layer {geojson_file}',
   /* kue job manager settings */
-  kue_redis_port: 6379,
-  kue_redis_host: '127.0.0.1',
+  kue_redis_port: process.env.REDIS_PORT !== undefined ? parseInt(process.env.REDIS_PORT) : 6379,
+  kue_redis_host: process.env.REDIS_HOST !== undefined ? process.env.REDIS_HOST : '127.0.0.1',
   kue_redis_prefix: 'q'
 }
