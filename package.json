@@ -11,7 +11,7 @@
     "mbtiles": "0.9.x",
     "archiver": "1.1.x",
     "tilelive": "5.12.2",
-    "tilelive-http": "0.11.3",
+    "tilelive-http": "file:libs/tilelive-http-0.11.3-hotfix",
     "mocha": "3.1.0",
     "async": "2.1.4",
     "redis": "2.6.x"
