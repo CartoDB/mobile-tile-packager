@@ -1,4 +1,5 @@
 var tilelive = require('@mapbox/tilelive');
+var MBTiles = require('@mapbox/mbtiles');
 require('tilelive-http')(tilelive);
 require("@mapbox/mbtiles").registerProtocols(tilelive);
 var util = require('util');
@@ -18,7 +19,23 @@ exports.getMbtiles = function(tileUrl, mbtilesFile, minzoom, maxzoom, bounds, lo
     progress: ((logOutput == true) ? hlprs.report : false),
     concurrency: conf.concurrency
   };
-  tilelive.copy(tileUrl, 'mbtiles://' + mbtilesFile, options, callback);
+  tilelive.copy(tileUrl, 'mbtiles://' + mbtilesFile, options, function(err){
+    if (err)
+      return callback(err);
+    new MBTiles(mbtilesFile + '?mode=rw', function(err, mbtiles) {
+      if (err)
+        return callback(err);
+      mbtiles.startWriting(function(err) {
+        if (err)
+          return callback(err);
+        mbtiles.putInfo({minzoom: options.minzoom, maxzoom: options.maxzoom, bounds: options.bounds}, function(err) {
+          if (err)
+            return callback(err);
+          mbtiles.stopWriting(callback);
+        });
+      });
+    });
+  });
 }
 
 exports.inst = function(username, template, callback) {
