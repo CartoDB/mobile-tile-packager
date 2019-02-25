@@ -8,6 +8,7 @@ services:
       context: .
     environment:
       - REDIS_HOST=redis
+      - MTP_HOST=mtp
     links:
       - redis
     ports:
