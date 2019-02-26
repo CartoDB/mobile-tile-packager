@@ -8,10 +8,9 @@ services:
       context: .
     environment:
       - REDIS_HOST=redis
+      - MTP_HOST=mtp
     links:
       - redis
     ports:
       - '8787:8787'
-    volumes:
-      - ./:/usr/src/app
     command: sleep 1d
