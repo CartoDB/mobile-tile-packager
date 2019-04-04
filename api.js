@@ -9,7 +9,7 @@ var hlprs = require('./helpers.js');
 var exports = module.exports = {};
 var childProcess = require('child_process');
 
-exports.getMbtiles = function(tileUrl, mbtilesFile, minzoom, maxzoom, bounds, logOutput, callback) {
+exports.getMbtiles = function(tileUrl, mbtilesFile, minzoom, maxzoom, bounds, metadata, logOutput, callback) {
   var options = {
     type: 'scanline',
     minzoom: parseInt(minzoom, 10),
@@ -28,7 +28,15 @@ exports.getMbtiles = function(tileUrl, mbtilesFile, minzoom, maxzoom, bounds, lo
       mbtiles.startWriting(function(err) {
         if (err)
           return callback(err);
-        mbtiles.putInfo({minzoom: options.minzoom, maxzoom: options.maxzoom, bounds: options.bounds}, function(err) {
+        var mbtilesMetadata = {
+          minzoom: options.minzoom,
+          maxzoom: options.maxzoom,
+          bounds: options.bounds,
+          format: 'pbf',
+          name: 'mobile-tile-packager',
+          json: JSON.stringify({vector_layers: metadata.layers})
+        };
+        mbtiles.putInfo(mbtilesMetadata, function(err) {
           if (err)
             return callback(err);
           mbtiles.stopWriting(callback);
@@ -38,12 +46,12 @@ exports.getMbtiles = function(tileUrl, mbtilesFile, minzoom, maxzoom, bounds, lo
   });
 }
 
-exports.inst = function(username, template, callback) {
+exports.inst_pub = function(username, template, callback) {
   var err404 = function(err) {
     return callback(new Error(err));
   }
   request.post({url: conf.inst_url.replace('{username}', username).replace('{template}', template),
-          headers: {'Content-Type': 'application/json'}}, function(err, request, resp) {
+          headers: {'Content-Type': 'application/json'}}, function(err, req, resp) {
     if (err) err404(err.message);
     try {
       var inst = JSON.parse(resp);
@@ -53,6 +61,38 @@ exports.inst = function(username, template, callback) {
       else {
         console.log('%s USER:%s, TEMPLATE:%s, LAYERGROUPID:%s, Instantiate was successful.', hlprs.currdatetime(), username, template, inst.layergroupid);
         return callback(null, inst.layergroupid, inst.metadata);
+      }
+    }
+    catch (e) {
+      err404(e);
+    }
+  });
+}
+
+exports.inst_priv = function(username, template, callback) {
+  var err404 = function(err) {
+    return callback(new Error(err));
+  }
+  request.get({url: conf.inst_url.replace('{username}', username).replace('{template}', template)}, function(err, req, resp) {
+    if (err) err404(err.message);
+    try {
+      var inst = JSON.parse(resp);
+      if (!inst.template) {
+        err404('Map template response is empty. (Possibly wrong username, template or api_key)');
+      }
+      else {
+        request.post({url: conf.map_url.replace('{username}', username),
+                headers: {'Content-Type': 'application/json'}, body: JSON.stringify(inst.template.layergroup)}, function(err, req, resp) {
+          if (err) err404(err.message);
+          var inst = JSON.parse(resp);
+          if (!inst.layergroupid) {
+            err404('Layergroup response is empty. (Possibly wrong username, template or api_key)');
+          }
+          else {
+            console.log('%s USER:%s, TEMPLATE:%s, LAYERGROUPID:%s, Get map template was successful.', hlprs.currdatetime(), username, template, inst.layergroupid);
+            return callback(null, inst.layergroupid, inst.metadata);
+          }
+        });
       }
     }
     catch (e) {
