@@ -28,10 +28,10 @@ b) **download all tiles** of given map from CARTO Maps API, scraping for given a
 
 ## Usage
 ### 1. Prepare data in CARTO:
-1. Upload map data table, set privacy to public or shared by link
+1. Upload map data table.
 2. Create map, define simple styling - colors etc. Complex styling (heatmaps, torque etc) probably does not work
 3. Note map ID from URL, convert it to template ID, so e.g. `https://cartomobile-team.carto.com/u/nutiteq/builder/846ab11c-f385-11e6-9314-0ee66e2c9693` becomes *tpl_846ab11c_f385_11e6_9314_0ee66e2c9693*
-3. Make map privacy to "shared by link" or "public"
+3. Create ```secrets.json``` file duplicating ```secrets.example.json```. If the map is private you must replace ```"api_key"``` property with a valid API key. The value of this property must be ```null``` if the map is public.
 
 **NB! Does NOT work with private map or dataset**
 
