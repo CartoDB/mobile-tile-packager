@@ -17,7 +17,7 @@ describe('Named Maps API test...', function() {
     });
 
     it('get layergroupid first from init', function(cb) {
-        api.inst(params.options.username, params.options.template, function(err, layerId, meta) {
+        api.inst_pub(params.options.username, params.options.template, function(err, layerId, meta) {
             if (err) cb(err);
             else {
                 var tileurl = conf.tile_url.replace('{username}', params.options.username).replace('{layergroupid}', layerId);
