@@ -1,4 +1,5 @@
 var port = 8787;
+var mtp_host = process.env.MTP_HOST ? process.env.MTP_HOST : 'localhost';
 var secrets = require('./secrets.json');
 var api_key = secrets.api_key ? `api_key=${secrets.api_key}` : '';
 
@@ -12,7 +13,7 @@ module.exports = {
   inst_url: `https://{username}.carto.com/api/v1/map/named/{template}?${api_key}`,
   map_url: `https://{username}.carto.com/api/v1/map?${api_key}`,
   tile_url: `https://{username}.carto.com/api/v1/map/{layergroupid}/{z}/{x}/{y}.mvt?${api_key}`,
-  download_url: `http://localhost:${port}/api/v1/package/get/{username}/{id}`,
+  download_url: `http://${mtp_host}:${port}/api/v1/package/get/{username}/{id}`,
   sql_api_url: `http://{username}.carto.com/api/v2/sql?${api_key}&q={sql}&format=GeoJSON`,
   tippe: 'tippecanoe -o {mbtiles_file} --minimum-zoom={minzoom} --maximum-zoom={maxzoom} --layer=layer {geojson_file}',
   /* kue job manager settings */
