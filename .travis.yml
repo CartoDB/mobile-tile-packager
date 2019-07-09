@@ -7,6 +7,5 @@ before_install:
   - sudo apt-get install -y libprotobuf-dev protobuf-compiler libsqlite3-dev
   - git clone https://github.com/mapbox/tippecanoe.git;cd tippecanoe;make;sudo make install
   - sudo apt-get install redis-server
-  - cp $TRAVIS_BUILD_DIR/secrets.example.json $TRAVIS_BUILD_DIR/secrets.json
 script:
   - npm install && npm test
