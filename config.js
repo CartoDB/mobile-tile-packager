@@ -1,7 +1,6 @@
 var port = 8787;
 var mtp_host = process.env.MTP_HOST ? process.env.MTP_HOST : 'localhost';
-var secrets = require('./secrets.json');
-var api_key = secrets.api_key ? `api_key=${secrets.api_key}` : '';
+var api_key = process.env.MTP_API_KEY ? `api_key=${process.env.MTP_API_KEY}` : '';
 
 
 module.exports = {
