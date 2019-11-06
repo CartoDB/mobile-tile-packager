@@ -34,7 +34,14 @@ exports.getMbtiles = function(tileUrl, mbtilesFile, minzoom, maxzoom, bounds, me
           bounds: options.bounds,
           format: 'pbf',
           name: 'mobile-tile-packager',
-          json: JSON.stringify({vector_layers: metadata.layers})
+          json: JSON.stringify({
+            vector_layers: metadata.layers.map(function(layer) {
+              return {
+                id: layer.id,
+                fields: {}
+              }
+            })
+          })
         };
         mbtiles.putInfo(mbtilesMetadata, function(err) {
           if (err)
