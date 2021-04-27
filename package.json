@@ -14,7 +14,7 @@
     "tilelive-http": "file:libs/tilelive-http-0.11.3-hotfix",
     "mocha": "3.1.0",
     "async": "2.1.4",
-    "redis": "2.6.x"
+    "redis": "3.1.x"
   },
   "scripts": {
     "test": "make test-all",
